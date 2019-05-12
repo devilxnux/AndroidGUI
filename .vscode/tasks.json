@@ -1,0 +1,16 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build JAR",
+            "type": "shell",
+            "command": "rm AndroidGUI.jar; javac id/dhipo/*.java id/dhipo/sdkbridge/*.java && jar cvfme AndroidGUI.jar MANIFEST.MF id.dhipo.AndroidGUI id/dhipo/*.class id/dhipo/sdkbridge/*.class",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

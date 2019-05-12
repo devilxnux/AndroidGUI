@@ -1,0 +1,4 @@
+Application-Name: AndroidGUI
+Specification-Title: AndroidGUI
+Specification-Version: 0.1beta
+Specification-Vendor: Dhipo Alam <dhipo.alam@outlook.com>

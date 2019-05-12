@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AndroidGUI",
+            "request": "launch",
+            "mainClass": "id.dhipo.AndroidGUI",
+            "projectName": "AndroidGUI_35bbe22f"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AndroidSDK",
+            "request": "launch",
+            "mainClass": "id.dhipo.sdkbridge.AndroidSDK",
+            "projectName": "AndroidGUI_35bbe22f"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - CmdExec",
+            "request": "launch",
+            "mainClass": "CmdExec",
+            "projectName": "AndroidGUI_35bbe22f"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AndroidGUI",
+            "request": "launch",
+            "mainClass": "AndroidGUI",
+            "projectName": "AndroidGUI_35bbe22f"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "id.dhipo.AndroidGUI"
+        }
+    ]
+}
