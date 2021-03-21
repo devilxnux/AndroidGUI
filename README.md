@@ -12,6 +12,7 @@ Current state of features availability:
 - [ ] Coffee maker
 - [ ] Bread toaster
 - [ ] Fill any feature you wish here...
+- [ ] 
 
 This project exists thanks to a certain company who loves striping features from their products.
 
@@ -20,6 +21,17 @@ This program is a straightly ugly and hacky replacement for Android SDK Manager 
 It would be much appreciated if somebody who have access to sdklib-\*.jar source code willing to share them with me, so I could refactor this program to access sdklib directly rather than parsing arbitrary output of a mundane program that could change any moment.
 
 Please fork as you like. This code is licensed under GNU GPL v3.
+
+## Running the code
+
+To run the code, simply do the following
+
+```bash
+git clone https://github.com/devilxnux/AndroidGUI.git
+cd AndroidGUI
+javac id/dhipo/*.java
+java id/dhipo/AndroidGUI
+```
 
 Sincerely yours,
 Dhipo Alam
