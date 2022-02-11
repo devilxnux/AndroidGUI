@@ -12,7 +12,6 @@ Current state of features availability:
 - [ ] Coffee maker
 - [ ] Bread toaster
 - [ ] Fill any feature you wish here...
-- [ ] 
 
 This project exists thanks to a certain company who loves striping features from their products.
 
@@ -29,8 +28,15 @@ To run the code, simply do the following
 ```bash
 git clone https://github.com/devilxnux/AndroidGUI.git
 cd AndroidGUI
-javac id/dhipo/*.java
+javac id/dhipo/*.java id/dhipo/sdkbridge/*.java
 java id/dhipo/AndroidGUI
+```
+Additionally, you can build JAR file by issuing
+
+```bash
+jar cvfme AndroidGUI.jar MANIFEST.MF id.dhipo.AndroidGUI id/dhipo/*.class id/dhipo/sdkbridge/*.class
+# Run generated JAR
+java -jar AndroidGUI.jar
 ```
 
 Sincerely yours,
