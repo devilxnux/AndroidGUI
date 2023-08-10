@@ -33,17 +33,17 @@ public class AndroidSDK {
         AndroidSDK sdk = new AndroidSDK(System.getenv("ANDROID_HOME"));
         sdk.setListener((action) -> {
             switch (action.getAction()) {
-            case SDKAction.ACTION_PROGRESS:
-                System.out.println(action.getPayload().concat("%"));
-                break;
-            case SDKAction.ACTION_STATUS:
-                System.out.println(action.getPayload());
-                break;
-            case SDKAction.ACTION_AVAILABLE:
-                System.out.println(String.join("", action.getPayload(), " v", action.getExtra()[0]));
-                break;
-            default:
-                break;
+                case SDKAction.ACTION_PROGRESS:
+                    System.out.println(action.getPayload().concat("%"));
+                    break;
+                case SDKAction.ACTION_STATUS:
+                    System.out.println(action.getPayload());
+                    break;
+                case SDKAction.ACTION_AVAILABLE:
+                    System.out.println(String.join("", action.getPayload(), " v", action.getExtra()[0]));
+                    break;
+                default:
+                    break;
             }
         });
         sdk.getPackageList();
@@ -71,16 +71,25 @@ public class AndroidSDK {
         this.listener = listener;
     }
 
-    private void procSdkManager(String param) {
+    private void procSdkManager(String... params) {
         try {
             // enter code here
             String osname = System.getProperty("os.name");
             String sdkmanagerCmd = "sdkmanager";
-            if (osname.contains("Windows")){
+            if (osname.contains("Windows")) {
                 sdkmanagerCmd = "sdkmanager.bat";
             }
-            Process proc = Runtime.getRuntime().exec(Paths
-                    .get(sdkPath.getAbsolutePath(), "tools", "bin", String.join(" ", sdkmanagerCmd, param)).toString());
+
+            String fullPath = Paths.get(sdkPath.getAbsolutePath(), "cmdline-tools", "latest", "bin", sdkmanagerCmd)
+                    .toString();
+            String[] arguments = new String[1 + params.length];
+            arguments[0] = fullPath;
+            for (int i = 0; i < params.length; i++) {
+                arguments[i + 1] = params[i];
+            }
+
+            ProcessBuilder builder = new ProcessBuilder(arguments);
+            Process proc = builder.start();
 
             // enter code here
 
@@ -88,7 +97,7 @@ public class AndroidSDK {
                 String line;
                 String status = SDKAction.ACTION_OTHER;
                 while ((line = input.readLine()) != null) {
-                    //System.out.println(line);
+                    // System.out.println(line);
                     // Parse progress status
                     if (line.contains("[")) {
                         Pattern reProgress = Pattern.compile("([0-9]+)[\\s%]+([A-Za-z]+.*)");
@@ -103,7 +112,7 @@ public class AndroidSDK {
                         status = SDKAction.ACTION_AVAILABLE;
                     } else if (line.contains("|") && !line.contains("Path") && !line.contains("---")) {
                         Pattern rePackages;
-                        if (status == SDKAction.ACTION_AVAILABLE){
+                        if (status == SDKAction.ACTION_AVAILABLE) {
                             rePackages = Pattern.compile("(.*)\\s+\\|(.*)\\s+\\|(.*)\\s*");
                         } else {
                             rePackages = Pattern.compile("(.*)\\s+\\|(.*)\\s+\\|(.*)\\s+\\|(.*)");
@@ -133,21 +142,24 @@ public class AndroidSDK {
         procSdkManager("--list");
     }
 
-    public void updateRepo(){
+    public void updateRepo() {
         procSdkManager("--update");
     }
 
-    public void installPackage(String packageName){
+    public void installPackage(String packageName) {
         procSdkManager(packageName);
     }
 
-    public void installPackages(String[] packageNames){
-        String param = String.join(" ", packageNames);
-        procSdkManager(param);
+    public void installPackages(String[] packageNames) {
+        procSdkManager(packageNames);
     }
 
-    public void removePackages(String[] packageNames){
-        String param = "--uninstall " + String.join(" ", packageNames);
-        procSdkManager(param);
+    public void removePackages(String... packageNames) {
+        String[] params = new String[1 + packageNames.length];
+        params[0] = "--uninstall";
+        for (int i = 0; i < packageNames.length; i++) {
+            params[i + 1] = packageNames[i];
+        }
+        procSdkManager(params);
     }
 }
